@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'UTM Candlescript Pro';
+  src: url('/fonts/UTM-Candlescript-Pro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SVN-Georgia';
+  src: url('/fonts/SVN-Georgia/SVN-Georgia/SVN-Georgia Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SVN-Georgia';
+  src: url('/fonts/SVN-Georgia/SVN-Georgia/SVN-Georgia Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SVN-Georgia';
+  src: url('/fonts/SVN-Georgia/SVN-Georgia/SVN-Georgia Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'SVN-Georgia';
+  src: url('/fonts/SVN-Georgia/SVN-Georgia/SVN-Georgia Bold Italic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/Brandon Text Complete/HVD Fonts - BrandonText-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/Brandon Text Complete/HVD Fonts - BrandonText-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/Brandon Text Complete/HVD Fonts - BrandonText-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --babe-green: #59b28a; /* BABE Stop AKN Green */
+  --babe-green-light: #8eccb0;
+  --babe-green-dark: #3a8a65;
+  --medical-white: #f8f9fa; /* slightly warm off-white */
+  --surface-white: #ffffff;
+  --text-dark: #2d3748;
+  --text-muted: #718096;
+  --text-light: #ffffff;
+  
+  --summer-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  --energy-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  --accent-gradient: linear-gradient(135deg, var(--babe-green-light) 0%, var(--babe-green) 100%);
+  
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --shadow-floating: 0 30px 60px -15px rgba(89, 178, 138, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Brandon Text', system-ui, -apple-system, sans-serif;
+  background-color: var(--medical-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.medical-gradient-bg {
+  background: var(--medical-white);
+  background: radial-gradient(circle at top right, rgba(253,251,251,1) 0%, rgba(248,249,250,1) 100%);
+}
+
+.summer-gradient-bg {
+  background: linear-gradient(180deg, #fffcf9 0%, #f4f6f8 100%);
+}
+
+.blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+/* AI Camera Scan Lines */
+@keyframes scan-line {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+.scan-line-anim {
+  animation: scan-line 3s linear infinite;
+  background: linear-gradient(to bottom, transparent, rgba(89, 178, 138, 0.4) 50%, var(--babe-green) 50%, transparent);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--babe-green);
+  color: white;
+  font-weight: bold;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+  background: var(--babe-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(89, 178, 138, 0.4);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--babe-green);
+  font-weight: bold;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  border: 2px solid var(--babe-green);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.btn-outline:hover {
+  background: var(--babe-green);
+  color: white;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 7s ease-in-out infinite 2s;
+}
+
+/* Utility to ensure canvas fills container perfectly */
+canvas, video {
+  display: block;
+}
