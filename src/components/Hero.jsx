@@ -10,11 +10,11 @@ const Hero = () => {
     <section className="relative w-full h-screen overflow-hidden bg-[var(--medical-white)]">
       
       {/* Floating Header */}
-      <header className="absolute top-0 w-full z-50 px-6 py-8 flex justify-between items-center text-white pointer-events-none">
-        <div className="flex items-center gap-4 pointer-events-auto">
-          <span className="font-bold tracking-[0.2em] text-xl drop-shadow-md">BABÉ</span>
-          <span className="w-[1px] h-4 bg-white/50 drop-shadow-md"></span>
-          <span className="tracking-widest text-sm uppercase drop-shadow-md">Stop AKN</span>
+      <header className="absolute top-0 w-full z-50 px-4 sm:px-6 py-4 sm:py-8 flex justify-between items-center text-white pointer-events-none">
+        <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
+          <span className="font-bold tracking-[0.2em] text-base sm:text-xl drop-shadow-md">BABÉ</span>
+          <span className="w-[1px] h-3 sm:h-4 bg-white/50 drop-shadow-md"></span>
+          <span className="tracking-widest text-[10px] sm:text-sm uppercase drop-shadow-md">Stop AKN</span>
         </div>
         <nav className="hidden md:flex gap-10 text-white/90 text-[10px] tracking-[0.2em] uppercase font-bold pointer-events-auto drop-shadow-md">
           <a href="#products" className="hover:text-[var(--babe-green)] transition-colors">Sản phẩm</a>
@@ -39,14 +39,13 @@ const Hero = () => {
       </motion.div>
 
       {/* Hero Typography */}
-      <div className="absolute inset-0 flex items-center justify-center text-center z-20 px-4">
+      <div className="absolute inset-0 flex items-center justify-center text-center z-20 px-3 sm:px-4">
         <motion.div style={{ y: textY }}>
           <h1 
-            className="text-5xl md:text-7xl lg:text-9xl text-white drop-shadow-2xl"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white drop-shadow-2xl leading-tight"
             style={{ 
               fontFamily: "'UTM Candlescript Pro', cursive",
-              fontWeight: 400, 
-              lineHeight: 1.2
+              fontWeight: 400
             }}
           >
             Da thở trong <br/> mọi nhịp sống
@@ -54,8 +53,8 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-10 w-full flex justify-center z-30 pointer-events-none">
-         <div className="w-[1px] h-24 bg-white/40 relative overflow-hidden">
+      <div className="absolute bottom-6 sm:bottom-10 w-full flex justify-center z-30 pointer-events-none">
+         <div className="w-[1px] h-16 sm:h-24 bg-white/40 relative overflow-hidden">
            <div className="absolute top-0 w-full h-full bg-white animate-[scan-line_2.5s_ease-in-out_infinite]"></div>
          </div>
       </div>
