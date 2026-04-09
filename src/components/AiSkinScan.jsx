@@ -8,8 +8,13 @@ const AiSkinScan = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [result, setResult] = useState(null);
+  const [cameraActive, setCameraActive] = useState(false);
 
   const capture = useCallback(() => {
+    if (!cameraActive) {
+      setCameraActive(true);
+      return;
+    }
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
     setIsScanning(true);
@@ -24,11 +29,12 @@ const AiSkinScan = () => {
         }
       });
     }, 4000);
-  }, [webcamRef]);
+  }, [webcamRef, cameraActive]);
 
   const reset = () => {
     setImgSrc(null);
     setResult(null);
+    setCameraActive(false);
   };
 
   return (
@@ -71,13 +77,17 @@ const AiSkinScan = () => {
             <div className="relative flex-1 rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center min-h-[350px] md:min-h-[450px]">
               
               {!imgSrc ? (
-                <Webcam
-                  audio={false}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  className="w-full h-full object-cover"
-                  videoConstraints={{ facingMode: "user" }}
-                />
+                cameraActive ? (
+                  <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    className="w-full h-full object-cover"
+                    videoConstraints={{ facingMode: "user" }}
+                  />
+                ) : (
+                  <img src="/images/d433263fb9f7ec6fc785677e5c255170.jpg" alt="Placeholder" className="w-full h-full object-cover" />
+                )
               ) : (
                 <img src={imgSrc} alt="User Face" className="w-full h-full object-cover grayscale-[30%] contrast-110" />
               )}
@@ -114,7 +124,7 @@ const AiSkinScan = () => {
                   onClick={capture}
                   className="bg-black text-white rounded-full text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold h-full px-12 hover:bg-[var(--babe-green)] transition-all"
                 >
-                  Bắt đầu Quét
+                  {cameraActive ? 'Chụp Ảnh' : 'Bắt đầu Quét'}
                 </button>
               ) : (
                 <button 

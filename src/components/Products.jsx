@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Products = () => {
+  const imgRef = useRef(null);
   const { scrollYProgress } = useScroll();
   
   const productY1 = useTransform(scrollYProgress, [0.1, 0.4], [100, -100]);
@@ -41,18 +42,33 @@ const Products = () => {
           
           {/* Cleansing Gel */}
           <div className="w-full lg:w-1/2 flex flex-col items-center">
-            <motion.div 
-              style={{ y: productY1, rotate: productRotate1 }} 
-              className="relative w-full max-w-[500px] aspect-square flex justify-center items-center group"
+            <div 
+              className="relative w-full max-w-[500px] aspect-square flex justify-center items-center"
+              onMouseEnter={() => {
+                if (imgRef.current) {
+                  imgRef.current.src = '/images/gemini-hover.png';
+                }
+              }}
+              onMouseLeave={() => {
+                if (imgRef.current) {
+                  imgRef.current.src = '/images/Bản_sao_của_241004_STOPAKN_CLEASING_CENITAL_01B_fondo_gris-removebg-preview.png';
+                }
+              }}
             >
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#f2efe9] rounded-full filter blur-[80px] opacity-50 z-0"></div>
+              <motion.div 
+                style={{ y: productY1, rotate: productRotate1 }} 
+                className="absolute inset-0 flex justify-center items-center pointer-events-none"
+              >
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#f2efe9] rounded-full filter blur-[80px] opacity-50 z-0"></div>
+              </motion.div>
               <img 
+                ref={imgRef}
                 src="/images/Bản_sao_của_241004_STOPAKN_CLEASING_CENITAL_01B_fondo_gris-removebg-preview.png" 
                 alt="Purifying Cleansing Gel" 
-                className="relative z-10 w-3/5 h-auto transition-transform duration-1000 ease-out group-hover:scale-105"
+                className="relative z-10 w-3/5 h-auto transition-all duration-300 cursor-pointer"
                 style={{ filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.08))' }}
               />
-            </motion.div>
+            </div>
             <div className="mt-4 text-center z-20 flex flex-col items-center">
               <span className="text-[10px] uppercase tracking-widest text-[var(--babe-green)] mb-3 font-bold border border-[var(--babe-green)] px-3 py-1 rounded-full">Bước 1</span>
               <h3 className="text-2xl tracking-widest uppercase text-black font-light mb-6">Purifying Cleansing Gel</h3>
