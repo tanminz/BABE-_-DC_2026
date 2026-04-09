@@ -16,7 +16,7 @@ const Hero = () => {
           <span className="w-[1px] h-3 sm:h-4 bg-white/50 drop-shadow-md"></span>
           <span className="tracking-widest text-[10px] sm:text-sm uppercase drop-shadow-md">Stop AKN</span>
         </div>
-        <nav className="hidden md:flex gap-10 text-white/90 text-[10px] tracking-[0.2em] uppercase font-bold pointer-events-auto drop-shadow-md">
+        <nav className="flex gap-2 sm:gap-10 text-white/90 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-bold pointer-events-auto drop-shadow-md">
           <a href="#products" className="hover:text-[var(--babe-green)] transition-colors">Sản phẩm</a>
           <a href="#technology" className="hover:text-[var(--babe-green)] transition-colors">Công nghệ</a>
           <a href="#scan" className="hover:text-[var(--babe-green)] transition-colors">AI Scan</a>
@@ -42,7 +42,7 @@ const Hero = () => {
       <div className="absolute inset-0 flex items-center justify-center text-center z-20 px-3 sm:px-4">
         <motion.div style={{ y: textY }}>
           <h1 
-            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white drop-shadow-2xl leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white drop-shadow-2xl leading-tight"
             style={{ 
               fontFamily: "'UTM Candlescript Pro', cursive",
               fontWeight: 400
