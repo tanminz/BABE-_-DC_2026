@@ -11,17 +11,19 @@ export default function Banner() {
       className="w-full px-4 py-8 relative z-20 mt-8"
     >
       <div className="max-w-5xl mx-auto">
-        {/* DON'T MISS Text - Above Banner */}
-        <h2 
-          className="text-6xl md:text-7xl font-bold text-center text-[var(--babe-green-dark)] opacity-70 relative z-20 mb-6"
-          style={{
-            fontFamily: "'SVN-Georgia', Georgia, serif",
-            letterSpacing: '0.1em',
-            lineHeight: '1.2'
-          }}
-        >
-          DON'T MISS
-        </h2>
+        {/* DON'T MISS Text - Marquee Animation */}
+        <div className="relative z-20 mb-6 overflow-hidden h-24 flex items-center">
+          <h2 
+            className="text-6xl md:text-7xl font-bold text-[var(--babe-green-dark)] marquee-text whitespace-nowrap"
+            style={{
+              fontFamily: "'SVN-Georgia', Georgia, serif",
+              letterSpacing: '0.1em',
+              lineHeight: '1.2'
+            }}
+          >
+            DON'T MISS &nbsp;&nbsp;&nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;&nbsp;&nbsp;
+          </h2>
+        </div>
 
         {/* Banner Image with Mascots */}
         <div className="relative flex items-center justify-center mb-8 z-20">

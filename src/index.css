@@ -117,6 +117,16 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translateY(0); }
 }
 
+/* Marquee Animation - Right to Left */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-text {
+  animation: marquee 8s linear infinite;
+}
+
 .scan-line-anim {
   animation: scan-line 3s linear infinite;
   background: linear-gradient(to bottom, transparent, rgba(89, 178, 138, 0.4) 50%, var(--babe-green) 50%, transparent);
