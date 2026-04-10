@@ -11,9 +11,9 @@ export default function Banner() {
       className="w-full px-4 py-8 relative z-20 mt-8"
     >
       <div className="max-w-5xl mx-auto">
-        {/* DON'T MISS Text - Behind Banner */}
+        {/* DON'T MISS Text - Above Banner */}
         <h2 
-          className="text-6xl md:text-7xl font-bold text-center text-[var(--babe-green-dark)] opacity-30 relative z-0 -mb-20"
+          className="text-6xl md:text-7xl font-bold text-center text-[var(--babe-green-dark)] opacity-70 relative z-20 mb-6"
           style={{
             fontFamily: "'SVN-Georgia', Georgia, serif",
             letterSpacing: '0.1em',
