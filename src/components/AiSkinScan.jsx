@@ -23,9 +23,10 @@ const AiSkinScan = () => {
       setResult({
         score: Math.floor(Math.random() * 30 + 60), 
         levels: {
-          sebum: 88,
-          pm25: 75,
-          hydration: 40
+          oil: Math.floor(Math.random() * 40 + 50),
+          acne: Math.floor(Math.random() * 35 + 40),
+          hydration: Math.floor(Math.random() * 30 + 40),
+          keratinization: Math.floor(Math.random() * 45 + 35)
         }
       });
     }, 4000);
@@ -143,7 +144,7 @@ const AiSkinScan = () => {
             <img 
               src="/images/mascot.png" 
               alt="Mascot" 
-              className="absolute -bottom-2 -right-8 w-40 md:w-48 lg:w-64 h-auto pointer-events-none z-20"
+              className="absolute -bottom-16 -right-20 w-40 md:w-48 lg:w-64 h-auto pointer-events-none z-20"
             />
             <AnimatePresence mode='wait'>
               {!result && !isScanning && (
@@ -201,29 +202,38 @@ const AiSkinScan = () => {
                   <div className="space-y-8 mb-12">
                     <div>
                       <div className="flex justify-between text-xs font-mono uppercase text-gray-500 mb-3">
-                        <span>Bã nhờn dư thừa</span>
-                        <span className="text-red-500 font-medium">{result.levels.sebum}%</span>
+                        <span>Độ dầu</span>
+                        <span className="text-red-500 font-medium">{result.levels.oil}%</span>
                       </div>
                       <div className="h-[3px] w-full bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.sebum}%` }} transition={{ duration: 1, delay: 0.2 }} className="h-full bg-red-400"></motion.div>
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.oil}%` }} transition={{ duration: 1, delay: 0.2 }} className="h-full bg-red-400"></motion.div>
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-xs font-mono uppercase text-gray-500 mb-3">
-                        <span>Bụi mịn tích tụ PM2.5</span>
-                        <span className="text-orange-400 font-medium">{result.levels.pm25}%</span>
+                        <span>Tình trạng mụn</span>
+                        <span className="text-orange-400 font-medium">{result.levels.acne}%</span>
                       </div>
                       <div className="h-[3px] w-full bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.pm25}%` }} transition={{ duration: 1, delay: 0.4 }} className="h-full bg-orange-400"></motion.div>
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.acne}%` }} transition={{ duration: 1, delay: 0.4 }} className="h-full bg-orange-400"></motion.div>
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-xs font-mono uppercase text-gray-500 mb-3">
-                        <span>Độ ẩm biểu bì</span>
-                        <span className="text-[var(--babe-green)] font-medium">{result.levels.hydration}%</span>
+                        <span>Độ ẩm</span>
+                        <span className="text-blue-400 font-medium">{result.levels.hydration}%</span>
                       </div>
                       <div className="h-[3px] w-full bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.hydration}%` }} transition={{ duration: 1, delay: 0.6 }} className="h-full bg-[var(--babe-green)]"></motion.div>
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.hydration}%` }} transition={{ duration: 1, delay: 0.6 }} className="h-full bg-blue-400"></motion.div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs font-mono uppercase text-gray-500 mb-3">
+                        <span>Dày sừng</span>
+                        <span className="text-yellow-600 font-medium">{result.levels.keratinization}%</span>
+                      </div>
+                      <div className="h-[3px] w-full bg-gray-100 rounded-full overflow-hidden">
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.levels.keratinization}%` }} transition={{ duration: 1, delay: 0.8 }} className="h-full bg-yellow-600"></motion.div>
                       </div>
                     </div>
                   </div>

@@ -7,23 +7,8 @@ const Hero = () => {
   const textY = useTransform(scrollY, [0, 500], [0, -40]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[var(--medical-white)]">
+    <section className="relative w-full h-screen overflow-hidden">
       
-      {/* Floating Header */}
-      <header className="absolute top-0 w-full z-50 px-4 sm:px-6 py-4 sm:py-8 flex justify-between items-center text-white pointer-events-none">
-        <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
-          <span className="font-bold tracking-[0.2em] text-base sm:text-xl drop-shadow-md">BABÉ</span>
-          <span className="w-[1px] h-3 sm:h-4 bg-white/50 drop-shadow-md"></span>
-          <span className="tracking-widest text-[10px] sm:text-sm uppercase drop-shadow-md">Stop AKN</span>
-        </div>
-        <nav className="flex gap-2 sm:gap-10 text-white/90 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-bold pointer-events-auto drop-shadow-md">
-          <a href="#products" className="hover:text-[var(--babe-green)] transition-colors">Sản phẩm</a>
-          <a href="#technology" className="hover:text-[var(--babe-green)] transition-colors">Công nghệ</a>
-          <a href="#scan" className="hover:text-[var(--babe-green)] transition-colors">AI Scan</a>
-          <a href="#gallery" className="hover:text-[var(--babe-green)] transition-colors">Hình ảnh</a>
-        </nav>
-      </header>
-
       {/* Immersive Cover Image */}
       <motion.div 
         className="absolute inset-0 w-full h-[110%] origin-top"
