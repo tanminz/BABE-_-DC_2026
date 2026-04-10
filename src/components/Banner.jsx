@@ -21,7 +21,7 @@ export default function Banner() {
               lineHeight: '1.2'
             }}
           >
-            DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;
+            DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;
           </h2>
         </div>
       </div>

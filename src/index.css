@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .marquee-text {
-  animation: marquee 25s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .scan-line-anim {
