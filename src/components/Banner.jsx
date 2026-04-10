@@ -10,9 +10,9 @@ export default function Banner() {
       viewport={{ once: true, margin: "-100px" }}
       className="w-full px-4 py-8 relative z-20 mt-8"
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
         {/* DON'T MISS Text - Marquee Animation */}
-        <div className="relative z-20 mb-6 overflow-hidden h-24 flex items-center">
+        <div className="relative z-20 mb-6 overflow-hidden h-24 flex items-center bg-white/5 backdrop-blur-sm">
           <h2 
             className="text-6xl md:text-7xl font-bold text-[var(--babe-green-dark)] marquee-text whitespace-nowrap"
             style={{
@@ -21,9 +21,12 @@ export default function Banner() {
               lineHeight: '1.2'
             }}
           >
-            DON'T MISS &nbsp;&nbsp;&nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;&nbsp;&nbsp;
+            DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;
           </h2>
         </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto">
 
         {/* Banner Image with Mascots */}
         <div className="relative flex items-center justify-center mb-8 z-20">
