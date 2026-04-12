@@ -55,7 +55,7 @@ const ProductCombo = () => {
     
     return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[85vh] shadow-2xl overflow-hidden">
+      <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] sm:max-h-[85vh] shadow-2xl overflow-y-auto flex flex-col">
         {/* Close Button - TOP RIGHT */}
         <button 
           onClick={() => setShowModal(false)} 
@@ -65,22 +65,22 @@ const ProductCombo = () => {
         </button>
 
         {/* Content - 2 Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-8">
           
           {/* LEFT SIDE - Image + Thumbnails */}
-          <div className="flex flex-col items-center justify-start gap-3">
+          <div className="flex flex-col items-center justify-start gap-2 sm:gap-3">
             {/* Main Image */}
-            <div className="w-full h-96 flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border-2 border-[var(--babe-green)]">
-              <img src={currentImage} alt="Product" className="w-full h-full object-cover object-center" />
+            <div className="w-full h-64 sm:h-80 md:h-96 flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border-2 border-[var(--babe-green)]">
+              <img src={currentImage} alt="Product" className="w-full h-full object-contain object-center" />
             </div>
             
             {/* Thumbnail Carousel - Below Image */}
-            <div className="flex gap-3 justify-center w-full">
+            <div className="flex gap-2 sm:gap-3 justify-center w-full flex-wrap">
               {product.images.map((img, idx) => (
                 <button 
                   key={idx}
                   onClick={() => setCurrentImage(img)}
-                  className={`w-16 h-16 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition border-2 ${currentImage === img ? 'border-[var(--babe-green)] bg-[var(--babe-green)]' : 'border-transparent bg-green-100'}`}
+                  className={`w-12 h-12 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition border-2 ${currentImage === img ? 'border-[var(--babe-green)] bg-[var(--babe-green)]' : 'border-transparent bg-green-100'}`}
                 >
                   <img src={img} alt={`pic${idx}`} className="w-full h-full object-contain p-1 rounded-lg" />
                 </button>
@@ -89,18 +89,18 @@ const ProductCombo = () => {
           </div>
 
           {/* RIGHT SIDE - Product Info + All Sections */}
-          <div className="flex flex-col gap-3 overflow-y-auto pr-2">
+          <div className="flex flex-col gap-2 sm:gap-3">
             {/* Product Name */}
             <div>
-              <h2 className="text-2xl font-light mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: 'var(--text-dark)', fontStyle: 'italic' }}>
+              <h2 className="text-xl sm:text-2xl font-light mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: 'var(--text-dark)', fontStyle: 'italic' }}>
                 {product.title}
               </h2>
               <p className="text-xs text-[var(--babe-green)] font-semibold tracking-widest uppercase" style={{ fontFamily: "'Brandon Text', sans-serif" }}>{product.subtitle}</p>
-              <p className="text-xs text-gray-500 mt-1">{product.type}</p>
+              <p className="text-[10px] text-gray-500 mt-1">{product.type}</p>
             </div>
 
             {/* Description */}
-            <p className="text-xs text-gray-600 leading-relaxed border-b pb-3">
+            <p className="text-xs text-gray-600 leading-relaxed border-b pb-2">
               {product.description}
             </p>
 
@@ -111,6 +111,7 @@ const ProductCombo = () => {
                 className="w-full flex items-center justify-between py-2 px-2 hover:bg-green-50 rounded transition"
               >
                 <span className="font-semibold text-xs text-[var(--babe-green)] uppercase tracking-widest">Chỉ định</span>
+                <ChevronDown size={16} className={`transition-transform ${expandedSections.indication ? 'rotate-180' : ''}`} />
               </button>
               {expandedSections.indication && (
                 <div className="px-2 py-2 text-xs text-gray-600 space-y-1 bg-green-50 rounded">
@@ -128,6 +129,7 @@ const ProductCombo = () => {
                 className="w-full flex items-center justify-between py-2 px-2 hover:bg-green-50 rounded transition"
               >
                 <span className="font-semibold text-xs text-[var(--babe-green)] uppercase tracking-widest">Công dụng</span>
+                <ChevronDown size={16} className={`transition-transform ${expandedSections.benefit ? 'rotate-180' : ''}`} />
               </button>
               {expandedSections.benefit && (
                 <div className="px-2 py-2 text-xs text-gray-600 space-y-1 bg-green-50 rounded">
@@ -145,6 +147,7 @@ const ProductCombo = () => {
                 className="w-full flex items-center justify-between py-2 px-2 hover:bg-green-50 rounded transition"
               >
                 <span className="font-semibold text-xs text-[var(--babe-green)] uppercase tracking-widest">Thành phần chính</span>
+                <ChevronDown size={16} className={`transition-transform ${expandedSections.ingredients ? 'rotate-180' : ''}`} />
               </button>
               {expandedSections.ingredients && (
                 <div className="px-2 py-2 text-xs text-gray-600 space-y-1 bg-green-50 rounded">
@@ -162,6 +165,7 @@ const ProductCombo = () => {
                 className="w-full flex items-center justify-between py-2 px-2 hover:bg-green-50 rounded transition"
               >
                 <span className="font-semibold text-xs text-[var(--babe-green)] uppercase tracking-widest">Cách sử dụng</span>
+                <ChevronDown size={16} className={`transition-transform ${expandedSections.usage ? 'rotate-180' : ''}`} />
               </button>
               {expandedSections.usage && (
                 <div className="px-2 py-2 text-xs text-gray-600 space-y-2 bg-green-50 rounded">
