@@ -8,105 +8,102 @@ export default function Banner() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="w-full px-4 py-8 relative z-20 mt-8"
+      className="w-full py-16 md:py-24 relative z-20"
     >
-      <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-        {/* DON'T MISS Text - Marquee Animation */}
-        <div className="relative z-20 mb-6 overflow-hidden h-24 flex items-center bg-white/5 backdrop-blur-sm">
-          <h2 
-            className="text-6xl md:text-7xl font-bold text-[var(--babe-green-dark)] marquee-text whitespace-nowrap"
-            style={{
-              fontFamily: "'SVN-Georgia', Georgia, serif",
-              letterSpacing: '0.1em',
-              lineHeight: '1.2'
-            }}
-          >
-            DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp; DON'T MISS &nbsp;&nbsp;
-          </h2>
-        </div>
-      </div>
-
-      <div className="max-w-5xl mx-auto">
-
+      <div className="max-w-6xl mx-auto px-4">
+        
         {/* Banner Image with Mascots */}
-        <div className="relative flex items-center justify-center mb-8 z-20">
-          {/* Banner */}
-          <div className="relative flex-1">
-            <motion.img
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
+        <div className="relative flex items-center justify-center mb-12 md:mb-16 z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="w-full"
+          >
+            <img
               src="/images/dc2026-img-5.png"
               alt="Campaign Banner"
-              className="w-full h-auto object-cover rounded-lg border-8 border-white shadow-lg"
+              className="w-full h-auto object-cover rounded-xl shadow-2xl"
             />
-          </div>
+          </motion.div>
         </div>
 
         {/* Title 6.6 */}
-        <h2 
-          className="text-4xl md:text-5xl font-bold text-center mb-8 text-[var(--babe-green-dark)]"
-          style={{
-            fontFamily: "'SVN-Georgia', Georgia, serif"
-          }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-12"
         >
-          MEGA LIVESTREAM 6.6
-        </h2>
+          <h2 
+            className="text-3xl md:text-5xl font-bold text-center text-[var(--babe-green-dark)]"
+            style={{ fontFamily: "'SVN-Georgia', Georgia, serif" }}
+          >
+            MEGA LIVESTREAM 6.6
+          </h2>
+        </motion.div>
 
-        {/* Two Images Grid - Smaller */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {/* Two Images Grid - Professional Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="rounded-lg overflow-hidden shadow-lg border-4 border-white max-w-xs md:max-w-sm mx-auto"
+            className="rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow"
           >
             <img
               src="/images/dc2026-img.png"
               alt="DC2026 Image"
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
             />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="rounded-lg overflow-hidden shadow-lg border-4 border-white max-w-xs md:max-w-sm mx-auto"
+            className="rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow"
           >
             <img
               src="/images/dc2026-img-4.png"
               alt="Livestream Image"
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
             />
           </motion.div>
         </div>
 
         {/* Title 15.6 */}
-        <h2 
-          className="text-4xl md:text-5xl font-bold text-center mb-8 text-[var(--babe-green-dark)]"
-          style={{
-            fontFamily: "'SVN-Georgia', Georgia, serif"
-          }}
-        >
-          MEGA LIVESTREAM 15.6
-        </h2>
-
-        {/* Third Image */}
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.9 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="rounded-lg overflow-hidden shadow-lg border-8 border-white"
+          className="mb-12"
+        >
+          <h2 
+            className="text-3xl md:text-5xl font-bold text-center text-[var(--babe-green-dark)]"
+            style={{ fontFamily: "'SVN-Georgia', Georgia, serif" }}
+          >
+            MEGA LIVESTREAM 15.6
+          </h2>
+        </motion.div>
+
+        {/* Third Image - Full Width */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="rounded-xl overflow-hidden shadow-2xl hover:shadow-2xl transition-shadow"
         >
           <img
             src="/images/dc2026-img-6.png"
             alt="Livestream 15.6 Image"
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
           />
         </motion.div>
       </div>

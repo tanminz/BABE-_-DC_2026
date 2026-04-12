@@ -3,19 +3,19 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
   const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 1000], [0, 80]);
-  const textY = useTransform(scrollY, [0, 500], [0, -40]);
+  const imageY = useTransform(scrollY, [0, 1000], [0, 40]);
+  const textY = useTransform(scrollY, [0, 500], [0, -20]);
 
   return (
-    <section className="relative w-full min-h-screen sm:h-screen overflow-hidden flex items-center justify-center">
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
       
       {/* Immersive Cover Image */}
       <motion.div 
-        className="absolute inset-0 w-full h-full origin-top"
+        className="absolute inset-0 w-full h-full"
         style={{ y: imageY }}
       >
         <img 
-          src="/images/cover_model.jpg" 
+          src="/images/cover_hero_new.png" 
           alt="Da thở trong mọi nhịp sống" 
           className="w-full h-full object-cover object-center"
         />
@@ -24,10 +24,10 @@ const Hero = () => {
       </motion.div>
 
       {/* Hero Typography */}
-      <div className="relative z-20 flex items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-0">
+      <div className="relative z-20 flex items-center justify-center text-center px-3 sm:px-6 w-full">
         <motion.div style={{ y: textY }}>
           <h1 
-            className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white drop-shadow-2xl leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white drop-shadow-2xl leading-tight"
             style={{ 
               fontFamily: "'UTM Candlescript Pro', cursive",
               fontWeight: 400,
@@ -40,7 +40,7 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-4 sm:bottom-6 md:bottom-10 w-full flex justify-center z-30 pointer-events-none">
-         <div className="w-[1px] h-12 sm:h-16 md:h-24 bg-white/40 relative overflow-hidden">
+         <div className="w-[1px] h-10 sm:h-16 md:h-24 bg-white/40 relative overflow-hidden">
            <div className="absolute top-0 w-full h-full bg-white animate-[scan-line_2.5s_ease-in-out_infinite]"></div>
          </div>
       </div>

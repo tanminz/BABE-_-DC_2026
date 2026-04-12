@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, Medal } from 'lucide-react';
+import { Trophy, Medal, X, CheckCircle2 } from 'lucide-react';
 
 const MiniGameSystem = () => {
   const [currentStage, setCurrentStage] = useState('start'); // start, round1, round2, round3
+  const [selectedCharacter, setSelectedCharacter] = useState(1); // 1 or 2
+  const [showGameRegisterModal, setShowGameRegisterModal] = useState(false);
+  const [gameEmail, setGameEmail] = useState('');
+  const [gameEmailSubmitted, setGameEmailSubmitted] = useState(false);
+  const [showRoundRulesModal, setShowRoundRulesModal] = useState(null); // null, 'round1', 'round2', 'round3'
 
   // Dữ liệu leaderboard - các thành viên và điểm của họ
   const [leaderboard] = useState([
@@ -38,7 +43,8 @@ const MiniGameSystem = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow"
+            onClick={() => setShowRoundRulesModal('round1')}
+            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
           >
             <div className="relative w-full h-64 overflow-hidden bg-gray-100">
               <img 
@@ -59,7 +65,8 @@ const MiniGameSystem = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow"
+            onClick={() => setShowRoundRulesModal('round2')}
+            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
           >
             <div className="relative w-full h-64 overflow-hidden bg-gray-100">
               <img 
@@ -80,7 +87,8 @@ const MiniGameSystem = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow"
+            onClick={() => setShowRoundRulesModal('round3')}
+            className="relative group overflow-hidden rounded-lg border border-gray-200 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
           >
             <div className="relative w-full h-64 overflow-hidden bg-gray-100">
               <img 
@@ -97,32 +105,32 @@ const MiniGameSystem = () => {
           </motion.div>
         </div>
 
-        <div className="w-full max-w-6xl mx-auto md:min-h-[500px] bg-white rounded-none border border-[#e5e5e5] flex relative overflow-hidden shadow-2xl">
+        <div className="w-full max-w-6xl mx-auto bg-white rounded-none border border-[#e5e5e5] flex relative overflow-hidden shadow-2xl min-h-[600px] md:min-h-[500px]">
           
           <AnimatePresence mode='wait'>
             {currentStage === 'start' && (
               <motion.div 
                 key="start"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="absolute inset-0 flex flex-col md:flex-row items-stretch bg-white"
+                className="absolute inset-0 flex flex-col md:flex-row items-stretch bg-white w-full"
               >
                 {/* Left side info */}
-                <div className="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-[#e5e5e5] p-8 md:p-12 flex flex-col justify-center bg-[#fafafa] z-20">
-                   <span className="text-[10px] uppercase tracking-widest text-[var(--babe-green)] mb-6 font-bold border border-[var(--babe-green)] px-3 py-1 rounded inline-block w-max">Khởi động</span>
-                   <h4 className="text-2xl font-light uppercase tracking-widest mb-4">Nhiệm Vụ</h4>
-                   <p className="text-sm text-gray-500 font-light leading-relaxed mb-12">
-                     Điều khiển các hoạt chất để giải cứu gốc nang lông khỏi bụi bẩn PM2.5 và dầu thừa. Hoàn thành 3 vòng để kích hoạt màng bảo vệ vô hình.
+                <div className="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-[#e5e5e5] p-6 md:p-12 flex flex-col justify-center bg-[#fafafa] z-20">
+                   <span className="text-[9px] uppercase tracking-widest text-[var(--babe-green)] mb-4 md:mb-6 font-bold border border-[var(--babe-green)] px-3 py-1 rounded inline-block w-max">Khởi động</span>
+                   <h4 className="text-xl md:text-2xl font-light uppercase tracking-widest mb-3 md:mb-4">Nhiệm Vụ</h4>
+                   <p className="text-xs md:text-sm text-gray-500 font-light leading-relaxed mb-6 md:mb-12">
+                     Người chơi chọn 1 trong 2 nhân vật Babé và sẽ đi qua 3 vòng thử thách với cách chơi khác nhau tương ứng với 3 con quái vật lần lượt là: oil monster (dầu), dirt monster (bụi) và acne monster (mụn). Xuyên suốt 3 vòng, người chơi sẽ nhặt được các tính năng cũng như sản phẩm và sẽ thắng khi hoàn thành cả 3 vòng
                    </p>
                    <button 
-                     onClick={() => setCurrentStage('round1')}
-                     className="bg-black text-white text-[10px] uppercase tracking-[0.2em] font-bold py-5 px-8 hover:bg-[var(--babe-green)] transition-colors w-full text-center shadow-lg"
+                     onClick={() => setShowGameRegisterModal(true)}
+                     className="bg-black text-white text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold py-3 md:py-5 px-6 md:px-8 hover:bg-[var(--babe-green)] transition-colors w-full text-center shadow-lg"
                    >
                      Vào Trận Ngay
                    </button>
                 </div>
 
-                {/* Right side Visual - BIG MASCOT */}
-                <div className="w-full md:w-2/3 flex items-center justify-center p-8 bg-white relative overflow-hidden">
+                {/* Right side Visual - CHARACTER SELECTION */}
+                <div className="w-full md:w-2/3 flex items-center justify-center p-4 md:p-8 bg-white relative overflow-hidden">
                    {/* Clean Grid pattern */}
                    <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
                    
@@ -130,18 +138,57 @@ const MiniGameSystem = () => {
                       <div className="absolute inset-0 rounded-full border-[1px] border-[var(--babe-green)] scale-[0.6] opacity-20 animate-[ping_4s_ease-out_infinite]"></div>
                       <div className="absolute inset-0 rounded-full border-[1px] border-[var(--babe-green)] scale-[0.8] opacity-10 animate-[ping_6s_ease-out_infinite]"></div>
                       
-                      <motion.img 
-                        initial={{ y: 20 }}
-                        animate={{ y: -20 }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", repeatType: "reverse" }}
-                        src="/images/mascot.png" 
-                        alt="Mascot" 
-                        className="w-[300px] md:w-[450px] lg:w-[500px] h-auto object-contain filter drop-shadow-[0_20px_40px_rgba(89,178,138,0.3)] relative z-20" 
-                      />
+                      {/* Character Selection */}
+                      <div className="mb-3 md:mb-6">
+                        <p className="text-xs text-gray-400 font-mono uppercase tracking-widest text-center mb-2 md:mb-4">Chọn nhân vật</p>
+                        <div className="flex gap-2 md:gap-4 items-center justify-center">
+                          {/* Character 1 */}
+                          <motion.button
+                            onClick={() => setSelectedCharacter(1)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`relative transition-all ${selectedCharacter === 1 ? 'ring-2 ring-[var(--babe-green)]' : 'opacity-50 hover:opacity-75'}`}
+                          >
+                            <img 
+                              src="/images/character1.png" 
+                              alt="Character 1" 
+                              className="w-[80px] md:w-[120px] h-auto object-contain drop-shadow-lg" 
+                            />
+                          </motion.button>
+                          
+                          {/* Character 2 */}
+                          <motion.button
+                            onClick={() => setSelectedCharacter(2)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`relative transition-all ${selectedCharacter === 2 ? 'ring-2 ring-[var(--babe-green)]' : 'opacity-50 hover:opacity-75'}`}
+                          >
+                            <img 
+                              src="/images/character2.png" 
+                              alt="Character 2" 
+                              className="w-[80px] md:w-[120px] h-auto object-contain drop-shadow-lg" 
+                            />
+                          </motion.button>
+                        </div>
+                      </div>
+                      
+                      {/* Selected Character Display */}
+                      <motion.div
+                        key={selectedCharacter}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="flex-1 flex items-center justify-center min-h-0"
+                      >
+                        <img 
+                          src={selectedCharacter === 1 ? "/images/character1.png" : "/images/character2.png"} 
+                          alt={`Character ${selectedCharacter}`} 
+                          className="w-[120px] md:w-[280px] h-auto object-contain filter drop-shadow-[0_20px_40px_rgba(89,178,138,0.3)]" 
+                        />
+                      </motion.div>
                    </div>
                    
                    {/* Data points */}
-                   <div className="absolute right-8 top-8 font-mono text-[10px] text-gray-300 text-right uppercase z-30">
+                   <div className="absolute right-4 md:right-8 top-4 md:top-8 font-mono text-[8px] md:text-[10px] text-gray-300 text-right uppercase z-30">
                      <div className="text-[var(--babe-green)]">System: Online</div>
                      <div>Target: Clogged Pores</div>
                      <div>Difficulty: Auto-Adjusting</div>
@@ -363,7 +410,311 @@ const MiniGameSystem = () => {
               </p>
             </div>
           </motion.div>
+
+          {/* GIFT SET SECTION */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-16 md:mt-20"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex justify-center order-2 md:order-1"
+              >
+                <img 
+                  src="/images/babe_gift_set.png" 
+                  alt="BABE Gift Set" 
+                  className="w-full max-w-sm md:max-w-md h-auto object-contain drop-shadow-2xl"
+                />
+              </motion.div>
+
+              {/* Text */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="order-1 md:order-2"
+              >
+                <h3 
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--babe-green-dark)] mb-4 leading-tight"
+                  style={{ fontFamily: "'SVN-Georgia', serif" }}
+                >
+                  Vô vàn phần quà hấp dẫn đang chờ những người thắng cuộc!!
+                </h3>
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed font-light">
+                  Những giải thưởng độc quyền từ BABE LABORATORIOS dành cho những người chiến thắng. Bộ sản phẩm chăm sóc da cao cấp chờ đón bạn!
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
+
+        {/* Game Registration Modal */}
+        {showGameRegisterModal && (
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-gradient-to-br from-[var(--babe-green-dark)] to-[var(--babe-green)] rounded-2xl p-8 max-w-md w-full shadow-2xl relative"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => {
+                  setShowGameRegisterModal(false);
+                  setGameEmail('');
+                  setGameEmailSubmitted(false);
+                }}
+                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              {/* Logo */}
+              <div className="flex justify-center mb-6">
+                <img
+                  src="/images/logo BABE.svg"
+                  alt="BABE Logo"
+                  className="h-10 brightness-0 invert"
+                />
+              </div>
+
+              {!gameEmailSubmitted ? (
+                <>
+                  <h3 className="text-white text-2xl font-bold text-center mb-3">Tham Gia Trận Đấu</h3>
+                  <p className="text-white/80 text-center text-sm mb-6">
+                    Đăng ký email để tiếp tục chơi game
+                  </p>
+
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+                    setGameEmailSubmitted(true);
+                    setTimeout(() => {
+                      setShowGameRegisterModal(false);
+                      setGameEmail('');
+                      setGameEmailSubmitted(false);
+                    }, 2000);
+                  }} className="space-y-4">
+                    <input
+                      type="email"
+                      placeholder="Nhập email của bạn"
+                      value={gameEmail}
+                      onChange={(e) => setGameEmail(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full bg-white text-[var(--babe-green-dark)] font-bold py-3 rounded-lg hover:bg-white/90 transition-colors uppercase tracking-widest text-sm"
+                    >
+                      Tham Gia Ngay
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center">
+                  <div className="mb-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20">
+                      <CheckCircle2 className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                  <p className="text-white font-bold text-lg">Tuyệt vời!</p>
+                  <p className="text-white/80 text-sm">Chuẩn bị vào trận đấu...</p>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
+
+        {/* ROUND RULES MODALS */}
+        {showRoundRulesModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9998] p-4">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowRoundRulesModal(null)}
+                className="sticky top-4 right-4 fixed z-10 text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <X size={28} />
+              </button>
+
+              {/* Round 1 Rules */}
+              {showRoundRulesModal === 'round1' && (
+                <div>
+                  {/* Image */}
+                  <img 
+                    src="/images/round1.jpg" 
+                    alt="Vòng 1" 
+                    className="w-full h-64 md:h-80 object-cover"
+                  />
+
+                  {/* Content */}
+                  <div className="p-8 md:p-12">
+                    <h3 className="text-3xl md:text-4xl font-bold text-[var(--babe-green-dark)] mb-6">
+                      Vòng 1: Dầu 0 Rầu
+                    </h3>
+
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">📖 Câu chuyện</h4>
+                        <p className="text-gray-600 leading-relaxed">
+                          Chạy trốn "quái vật dầu" trong thành phố nóng ẩm để thu thập tính năng sản phẩm và né chướng ngại vật.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">🎮 Gameplay:</h4>
+                        <ul className="space-y-2 text-gray-600">
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Di chuyển trái, phải, nhảy để né chướng ngại vật (mụn dầu)</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Thu thập bong bóng nước để tính điểm</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Mỗi 1000m nhận 1 tính năng của Action 360 (tổng 6)</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-gradient-to-r from-[var(--babe-green)]/10 to-transparent p-4 rounded-lg border-l-4 border-[var(--babe-green)]">
+                        <h4 className="text-lg font-bold text-[var(--babe-green-dark)] mb-2">🏆 Điều kiện thắng</h4>
+                        <p className="text-gray-700 font-semibold">
+                          Đủ 6000m + Đủ 6 tính năng → Thắng
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Round 2 Rules */}
+              {showRoundRulesModal === 'round2' && (
+                <div>
+                  {/* Image */}
+                  <img 
+                    src="/images/round2.jpg" 
+                    alt="Vòng 2" 
+                    className="w-full h-64 md:h-80 object-cover"
+                  />
+
+                  {/* Content */}
+                  <div className="p-8 md:p-12">
+                    <h3 className="text-3xl md:text-4xl font-bold text-[var(--babe-green-dark)] mb-6">
+                      Vòng 2: Húc Bụi
+                    </h3>
+
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">📖 Concept</h4>
+                        <p className="text-gray-600 leading-relaxed">
+                          Tiêu diệt các "quái vật bụi bẩn" trong mê cung bằng cách đặt skincare bombs trong thời gian cố định để tính điểm.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">🎮 Gameplay:</h4>
+                        <ul className="space-y-2 text-gray-600">
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Đặt bomb để tiêu diệt quái</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span><strong>2 phút:</strong> diệt càng nhiều → điểm càng cao</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Chạm quái/bom → thua ngay</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Nhặt sản phẩm sữa rửa mặt hay oil control pad để tăng điểm và nhận khiên 1 lần</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-gradient-to-r from-[var(--babe-green)]/10 to-transparent p-4 rounded-lg border-l-4 border-[var(--babe-green)]">
+                        <h4 className="text-lg font-bold text-[var(--babe-green-dark)] mb-2">⏱️ Thời gian</h4>
+                        <p className="text-gray-700 font-semibold">
+                          2 phút để diệt càng nhiều quái vật bụi càng tốt
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Round 3 Rules */}
+              {showRoundRulesModal === 'round3' && (
+                <div>
+                  {/* Image */}
+                  <img 
+                    src="/images/round3.png" 
+                    alt="Vòng 3" 
+                    className="w-full h-64 md:h-80 object-cover"
+                  />
+
+                  {/* Content */}
+                  <div className="p-8 md:p-12">
+                    <h3 className="text-3xl md:text-4xl font-bold text-[var(--babe-green-dark)] mb-6">
+                      Vòng 3: Gặp Mụn Là Trụng
+                    </h3>
+
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">📖 Concept</h4>
+                        <p className="text-gray-600 leading-relaxed">
+                          Đối đầu trực tiếp với quái vật mụn, né đòn tấn công và phản công để giành chiến thắng.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800 mb-3">🎮 Gameplay:</h4>
+                        <ul className="space-y-2 text-gray-600">
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Đấu với quái vật mụn, di chuyển qua lại, lên xuống để né</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Ấn vào màn hình để tấn công</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span>Bị trúng đòn → Clean Level giảm</span>
+                          </li>
+                          <li className="flex gap-3">
+                            <span className="text-[var(--babe-green)] font-bold">•</span>
+                            <span><strong>Không giới hạn thời gian,</strong> đánh hết máu quái vật → thắng</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-gradient-to-r from-[var(--babe-green)]/10 to-transparent p-4 rounded-lg border-l-4 border-[var(--babe-green)]">
+                        <h4 className="text-lg font-bold text-[var(--babe-green-dark)] mb-2">🏆 Tính Điểm</h4>
+                        <p className="text-gray-700 font-semibold">
+                          Thắng với Clean Level càng cao và tiêu diệt quái càng nhanh → điểm càng cao
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );

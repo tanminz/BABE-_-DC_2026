@@ -50,7 +50,7 @@ const TechnologyVideo = () => {
         
         <div className="mt-12 text-center max-w-2xl mx-auto px-4">
           <p className="text-sm tracking-widest leading-relaxed text-gray-500 uppercase">
-            Cơ chế tạo bọt Micellar kết hợp tẩy tế bào chết hóa học gỡ rối tận sâu vi nang lông, tiêu diệt sự kìm kẹp của bụi mịn công nghiệp.
+            Dòng sản phẩm BABÉ Stop AKN được phát triển nhằm chăm sóc da dầu mụn và da dễ nổi mụn dựa trên nền tảng khoa học da liễu.
           </p>
         </div>
       </div>

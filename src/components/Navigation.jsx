@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/60 via-black/40 to-transparent backdrop-blur-sm">
-      <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
-        <span className="font-bold tracking-[0.2em] text-base sm:text-xl text-white drop-shadow-md">BABÉ</span>
-        <span className="w-[1px] h-3 sm:h-4 bg-white/50 drop-shadow-md"></span>
-        <span className="tracking-widest text-[10px] sm:text-sm uppercase text-white/70 drop-shadow-md">Laboratorios</span>
+    <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-8 py-2 sm:py-3 md:py-4 flex justify-between items-center bg-gradient-to-b from-black/60 via-black/40 to-transparent backdrop-blur-sm gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 pointer-events-auto flex-shrink-0">
+        <span className="font-bold tracking-[0.1em] text-xs sm:text-base md:text-lg lg:text-xl text-white drop-shadow-md">BABÉ</span>
+        <span className="w-[1px] h-2 sm:h-2.5 md:h-3 bg-white/50 drop-shadow-md flex-shrink-0"></span>
+        <span className="tracking-[0.05em] text-[8px] sm:text-[10px] md:text-xs uppercase text-white/70 drop-shadow-md">Laboratorios</span>
       </div>
       
-      <nav className="flex gap-4 sm:gap-10 text-white/90 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-bold pointer-events-auto drop-shadow-md">
+      <nav className="flex gap-1.5 sm:gap-3 md:gap-8 text-white/90 text-[10px] sm:text-xs md:text-sm tracking-[0.1em] uppercase font-bold pointer-events-auto drop-shadow-md">
         <NavLink 
           to="/" 
           className={({ isActive }) => 

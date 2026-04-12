@@ -8,13 +8,9 @@ const AiSkinScan = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [result, setResult] = useState(null);
-  const [cameraActive, setCameraActive] = useState(false);
+  const [cameraActive, setCameraActive] = useState(true);
 
   const capture = useCallback(() => {
-    if (!cameraActive) {
-      setCameraActive(true);
-      return;
-    }
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
     setIsScanning(true);
@@ -30,7 +26,7 @@ const AiSkinScan = () => {
         }
       });
     }, 4000);
-  }, [webcamRef, cameraActive]);
+  }, [webcamRef]);
 
   const reset = () => {
     setImgSrc(null);
@@ -75,10 +71,10 @@ const AiSkinScan = () => {
               <span>Vision v2.0</span>
             </div>
 
-            <div className="relative flex-1 rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center min-h-[350px] md:min-h-[450px]">
+            <div className="relative flex-1 rounded-2xl overflow-hidden bg-gray-900 flex items-center justify-center min-h-[350px] md:min-h-[450px]">
               
               {!imgSrc ? (
-                cameraActive ? (
+                <>
                   <Webcam
                     audio={false}
                     ref={webcamRef}
@@ -86,35 +82,78 @@ const AiSkinScan = () => {
                     className="w-full h-full object-cover"
                     videoConstraints={{ facingMode: "user" }}
                   />
-                ) : (
-                  <img src="/images/d433263fb9f7ec6fc785677e5c255170.jpg" alt="Placeholder" className="w-full h-full object-cover" />
-                )
+                  
+                  {/* Face Detection Status Tabs */}
+                  <div className="absolute top-4 left-0 right-0 flex gap-2 px-4 z-20">
+                    <div className="px-3 py-1 rounded border-2 border-[var(--babe-green)] text-[var(--babe-green)] text-[10px] font-bold">
+                      ÁNH SÁNG
+                    </div>
+                    <div className="px-3 py-1 rounded border-2 border-[var(--babe-green)] text-[var(--babe-green)] text-[10px] font-bold">
+                      VỊ TRÍ GƯƠNG MẶT
+                    </div>
+                    <div className="px-3 py-1 rounded border-2 border-[var(--babe-green)] text-[var(--babe-green)] text-[10px] font-bold">
+                      NHÌN THẲNG
+                    </div>
+                  </div>
+
+                  {/* Face Detection Grid Overlay */}
+                  <div className="absolute inset-0 z-10 flex items-center justify-center">
+                    {/* Grid Pattern */}
+                    <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(34, 197, 94, 0.3)" strokeWidth="1"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#grid)" />
+                      
+                      {/* Animated Face Outline */}
+                      <ellipse cx="50%" cy="50%" rx="35%" ry="45%" fill="none" stroke="rgba(34, 197, 94, 0.8)" strokeWidth="2" opacity="0.8"/>
+                    </svg>
+                  </div>
+
+                  {/* Control Icons Bottom */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-8 z-20">
+                    <button className="w-12 h-12 rounded-full bg-[var(--babe-green)]/20 border-2 border-[var(--babe-green)] flex items-center justify-center">
+                      <span className="text-[var(--babe-green)] text-lg">●</span>
+                    </button>
+                    <button className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
+                      <span className="text-white/50 text-lg">◉</span>
+                    </button>
+                  </div>
+                </>
               ) : (
                 <img src={imgSrc} alt="User Face" className="w-full h-full object-cover grayscale-[30%] contrast-110" />
               )}
 
-              {/* Minimalist Scanning Overlay */}
+              {/* Scanning Overlay */}
               {isScanning && (
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-30 flex items-center justify-center">
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-30 flex items-center justify-center bg-black/20">
                   
-                  {/* Subtle Face Bounding Box */}
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-3/4 h-3/4 border-[1.5px] border-[var(--babe-green)] rounded-3xl relative"
-                  >
-                    {/* Scanner Line attached to box */}
+                  {/* Scanning Grid Animation */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id="scanGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+                          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(34, 197, 94, 0.5)" strokeWidth="1"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#scanGrid)" />
+                      <ellipse cx="50%" cy="50%" rx="35%" ry="45%" fill="none" stroke="rgba(34, 197, 94, 1)" strokeWidth="3"/>
+                    </svg>
+
+                    {/* Scanning Line Animation */}
                     <motion.div 
-                      initial={{ top: '0%' }}
+                      initial={{ top: '-100%' }}
                       animate={{ top: '100%' }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                      className="absolute left-0 w-full h-[2px] bg-[var(--babe-green)] shadow-[0_4px_20px_var(--babe-green)]"
-                    ></motion.div>
-                  </motion.div>
-                  
-                  {/* Blur effect */}
-                  <div className="absolute inset-0 backdrop-blur-[1px] bg-[var(--babe-green)]/5"></div>
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute left-0 right-0 h-1 bg-gradient-to-b from-[var(--babe-green)] to-transparent"
+                    />
+                  </div>
+
+                  <div className="relative z-10 text-center">
+                    <p className="text-white font-bold text-lg drop-shadow-lg">Đang quét...</p>
+                  </div>
                 </div>
               )}
             </div>
@@ -125,7 +164,7 @@ const AiSkinScan = () => {
                   onClick={capture}
                   className="bg-black text-white rounded-full text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold h-full px-12 hover:bg-[var(--babe-green)] transition-all"
                 >
-                  {cameraActive ? 'Chụp Ảnh' : 'Bắt đầu Quét'}
+                  Chụp Ảnh
                 </button>
               ) : (
                 <button 
