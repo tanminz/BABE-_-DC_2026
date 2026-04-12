@@ -76,16 +76,6 @@ function App() {
                   <li><a href="/mini-game" className="hover:text-[var(--babe-green)] transition">Mini Game</a></li>
                 </ul>
               </div>
-
-              {/* Contact */}
-              <div>
-                <h4 className="font-semibold text-[var(--babe-green-dark)] mb-4 text-sm">Liên hệ</h4>
-                <ul className="space-y-2 text-sm text-[var(--text-muted)]">
-                  <li>Email: info@babe.com</li>
-                  <li>Điện thoại: 1900 xxxx</li>
-                  <li>Địa chỉ: TP. Hồ Chí Minh</li>
-                </ul>
-              </div>
             </div>
 
             {/* Copyright */}

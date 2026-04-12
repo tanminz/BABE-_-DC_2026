@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
   return (
-    <header className="fixed top-0 w-full z-50 px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center bg-gradient-to-b from-black/60 via-black/40 to-transparent backdrop-blur-sm">
       <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
         <span className="font-bold tracking-[0.2em] text-base sm:text-xl text-white drop-shadow-md">BABÉ</span>
         <span className="w-[1px] h-3 sm:h-4 bg-white/50 drop-shadow-md"></span>
