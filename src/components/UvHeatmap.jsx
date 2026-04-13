@@ -139,7 +139,7 @@ const UvHeatmap = () => {
                 >
                   Bản Đồ Bụi PM2.5
                 </h2>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Khu vực: TP. Hồ Chí Minh</p>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Nhấp vào điểm bất kì trên bản đồ để coi chỉ số bụi</p>
               </div>
               
               {displayPM25 !== null && (
