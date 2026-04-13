@@ -1,41 +1,18 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { RefreshCw, Maximize, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AiSkinScan = () => {
   const webcamRef = useRef(null);
-  const sectionRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [result, setResult] = useState(null);
-  const [isInView, setIsInView] = useState(false);
+  const [cameraEnabled, setCameraEnabled] = useState(false);
 
-  useEffect(() => {
-    // Set up Intersection Observer to detect when section is in view
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Optional: unobserve after first intersection to prevent multiple permission requests
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1 // Trigger when 10% of section is visible
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const handleCameraClick = () => {
+    setCameraEnabled(true);
+  };
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -58,11 +35,11 @@ const AiSkinScan = () => {
   const reset = () => {
     setImgSrc(null);
     setResult(null);
-    setCameraActive(false);
+    setCameraEnabled(false);
   };
 
   return (
-    <section id="scan" className="py-0 px-4 relative overflow-hidden" ref={sectionRef}>
+    <section id="scan" className="py-0 px-4 relative overflow-hidden">
       {/* Background Image positioned extremely to the right */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img 
@@ -92,8 +69,8 @@ const AiSkinScan = () => {
           <div className="w-full lg:w-1/2 relative bg-white flex flex-col p-6 md:p-10 order-1 lg:order-none border-t lg:border-t-0 lg:border-r border-[#ebebeb]">
             <div className="flex justify-between text-gray-400 font-mono text-[10px] mb-4 tracking-widest uppercase relative z-20">
               <span className="flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${isScanning ? 'bg-[var(--babe-green)] animate-pulse' : isInView ? 'bg-[var(--babe-green)]' : 'bg-gray-300'}`}></span>
-                {isScanning ? 'Processing Image...' : isInView ? 'Camera Ready' : 'Camera Inactive'}
+                <span className={`w-2 h-2 rounded-full ${isScanning ? 'bg-[var(--babe-green)] animate-pulse' : cameraEnabled ? 'bg-[var(--babe-green)]' : 'bg-gray-300'}`}></span>
+                {isScanning ? 'Processing Image...' : cameraEnabled ? 'Camera Ready' : 'Camera Idle'}
               </span>
               <span>Vision v2.0</span>
             </div>
@@ -102,7 +79,7 @@ const AiSkinScan = () => {
               
               {!imgSrc ? (
                 <>
-                  {isInView ? (
+                  {cameraEnabled ? (
                     <Webcam
                       audio={false}
                       ref={webcamRef}
@@ -115,7 +92,7 @@ const AiSkinScan = () => {
                       <div className="w-12 h-12 rounded-full border-2 border-[var(--babe-green)]/30 flex items-center justify-center">
                         <div className="w-8 h-8 rounded-full border-2 border-[var(--babe-green)]/50"></div>
                       </div>
-                      <p className="text-[var(--babe-green)]/60 text-sm font-mono">Chờ để kích hoạt camera...</p>
+                      <p className="text-[var(--babe-green)]/60 text-sm font-mono">Nhấn nút "Chụp Ảnh" để bắt đầu...</p>
                     </div>
                   )}
                   
@@ -197,11 +174,10 @@ const AiSkinScan = () => {
             <div className="mt-8 flex justify-center h-14 relative z-20">
               {!imgSrc ? (
                 <button 
-                  onClick={capture}
-                  disabled={!isInView}
-                  className={`bg-black text-white rounded-full text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold h-full px-12 transition-all ${isInView ? 'hover:bg-[var(--babe-green)] cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                  onClick={cameraEnabled ? capture : handleCameraClick}
+                  className={`bg-black text-white rounded-full text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold h-full px-12 transition-all ${cameraEnabled ? 'hover:bg-[var(--babe-green)] cursor-pointer' : 'hover:bg-gray-800 cursor-pointer'}`}
                 >
-                  {isInView ? 'Chụp Ảnh' : 'Cuộn Xuống để Kích Hoạt'}
+                  {cameraEnabled ? 'Chụp Ảnh' : 'Bật Camera'}
                 </button>
               ) : (
                 <button 
